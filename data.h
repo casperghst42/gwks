@@ -24,8 +24,7 @@
 #include <vcl.h>
 #include <Registry.hpp>
 //---------------------------------------------------------------------------
-typedef struct cpTiniData
-{
+typedef struct cpTiniData {
   cpTiniData( ) { key = key; name = ""; data = ""; }
 
   AnsiString key;
@@ -35,18 +34,15 @@ typedef struct cpTiniData
 typedef cpTiniData* cpPTiniData;
 
 //---------------------------------------------------------------------------
-class cpTiniFile
-{
+class cpTiniFile {
   public:
-    cpTiniFile( AnsiString a_file, AnsiString a_section )
-    {
+    cpTiniFile( AnsiString a_file, AnsiString a_section ) {
       file = a_file;
       section = a_section;
       Initialize( );
     }
 
-    ~cpTiniFile( )
-    {
+    ~cpTiniFile( ) {
       int count = alist->Count;
       for( int i = 0; i < count; i++ )
       {

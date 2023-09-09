@@ -29,9 +29,7 @@
 #pragma resource "*.dfm"
 TForm1 *Form1;
 //---------------------------------------------------------------------------
-__fastcall TForm1::TForm1(TComponent* Owner)
-  : TForm(Owner)
-{
+__fastcall TForm1::TForm1(TComponent* Owner) : TForm(Owner) {
   gwExe = "";
   exePath = "";
   gwInstalled = false;
@@ -40,8 +38,7 @@ __fastcall TForm1::TForm1(TComponent* Owner)
   tmTimeOut = 0;
 }
 //---------------------------------------------------------------------------
-void TForm1::getPos( void )
-{
+void TForm1::getPos( void ) {
   top_pos = this->Top;
   left_pos = this->Left;
 
@@ -49,8 +46,7 @@ void TForm1::getPos( void )
   confdata->SetData("Left", AnsiString( left_pos ) );
 }
 //---------------------------------------------------------------------------
-void __fastcall TForm1::btnLaunchClick(TObject *Sender)
-{
+void __fastcall TForm1::btnLaunchClick(TObject *Sender) {
 // UINT WINAPI WinExec( LPCSTR lpCmdLine, UINT uCmdShow );
   if( idxSelected < 0 )
     return;
@@ -58,13 +54,11 @@ void __fastcall TForm1::btnLaunchClick(TObject *Sender)
   AnsiString app = gwExe;
   AnsiString data;
   long ret = -1;
-  if( inidata->GetData( idxSelected, data ) )
-  {
+  if( inidata->GetData( idxSelected, data ) ) {
     confdata->SetData( "LastUsed", AnsiString( idxSelected ) );
     app += " " + data;
     ret = WinExec( app.c_str( ), SW_SHOW );
-    if( ret > 32 )
-    {
+    if( ret > 32 ) {
       getPos( );
       confdata->WriteFile( );
       inidata->WriteFile( );
@@ -75,17 +69,14 @@ void __fastcall TForm1::btnLaunchClick(TObject *Sender)
   }
 }
 //---------------------------------------------------------------------------
-void __fastcall TForm1::btnCancelClick(TObject *Sender)
-{
+void __fastcall TForm1::btnCancelClick(TObject *Sender) {
   Application->Terminate( );
 }
 //---------------------------------------------------------------------------
-void __fastcall TForm1::btnConfigureClick(TObject *Sender)
-{
+void __fastcall TForm1::btnConfigureClick(TObject *Sender) {
   TRegistry *treg = new TRegistry( );
   treg->RootKey =  HKEY_CLASSES_ROOT;
-  if( treg->OpenKey( EDITINI, false ) )
-  {
+  if( treg->OpenKey( EDITINI, false ) ) {
     AnsiString sysroot = AnsiString( getenv( "SystemRoot" ) );
     AnsiString regstr = treg->ReadString("");
     int s_pos = regstr.AnsiPos("\\");
@@ -139,21 +130,18 @@ void __fastcall TForm1::btnConfigureClick(TObject *Sender)
 */
 }
 //---------------------------------------------------------------------------
-void __fastcall TForm1::btnNewClick(TObject *Sender)
-{
+void __fastcall TForm1::btnNewClick(TObject *Sender) {
   TForm2 *confForm = new TForm2( this );
   confForm->CurrentSelection( -1 );
   int ret = confForm->ShowModal( );
 
-  if( ret && ( confForm->result == save_item ) )
-  {
+  if( ret && ( confForm->result == save_item ) ) {
   }
 
 }
 //---------------------------------------------------------------------------
 
-void __fastcall TForm1::onFormCreate(TObject *Sender)
-{
+void __fastcall TForm1::onFormCreate(TObject *Sender) {
   getGWExe( );
   exePath = ExtractFilePath(Application->ExeName);
 
@@ -180,16 +168,14 @@ void __fastcall TForm1::onFormCreate(TObject *Sender)
 
   tmTimer->Enabled = false;
 
-  if( confdata->GetData( "TimerMode", data ) )
-  {
+  if( confdata->GetData( "TimerMode", data ) ) {
     tmType = atoi( data.c_str( ) );
     if( tmType < 0 && tmType > 2 )
       tmType = 0;
   }
 
   if( tmType != timer_none )
-    if( confdata->GetData( "TimerDelayInSeconds", data ) );
-    {
+    if( confdata->GetData( "TimerDelayInSeconds", data ) ) {
       tmTimeOut = atoi( data.c_str( ) ) * 1000;
       tmTimer->Interval = tmTimeOut;
       tmTimer->Enabled = true;
@@ -204,12 +190,10 @@ void __fastcall TForm1::onFormCreate(TObject *Sender)
   btnCheck( );
 }
 //---------------------------------------------------------------------------
-void TForm1::getGWExe( void )
-{
+void TForm1::getGWExe( void ) {
   TRegistry *treg = new TRegistry( );
   treg->RootKey = HKEY_CLASSES_ROOT;
-  if( treg->OpenKey( GWREGKEY, false ) )
-  {
+  if( treg->OpenKey( GWREGKEY, false ) ) {
     gwExe = treg->ReadString("");
     gwExe.Trim( );
     if( gwExe.Length( ) )
@@ -219,15 +203,13 @@ void TForm1::getGWExe( void )
     gwInstalled = false;
 }
 //---------------------------------------------------------------------------
-void TForm1::updateList( int idx )
-{
+void TForm1::updateList( int idx ) {
   AnsiString data;
   idxSelected = idx;
   int i = 0;
   int count = 0;
   cList->Clear( );
-  while( inidata->GetName( i++, data ) )
-  {
+  while( inidata->GetName( i++, data ) ) {
     cList->Items->Add( data );
     count++;
   }
@@ -243,8 +225,7 @@ void TForm1::updateList( int idx )
 }
 
 //---------------------------------------------------------------------------
-void TForm1::btnCheck( )
-{
+void TForm1::btnCheck( ) {
   if( gwInstalled && ( idxSelected >= 0 ) )
     btnLaunch->Enabled = true;
   else
@@ -258,8 +239,7 @@ void TForm1::btnCheck( )
 }
 
 //---------------------------------------------------------------------------
-void __fastcall TForm1::cListChange(TObject *Sender)
-{
+void __fastcall TForm1::cListChange(TObject *Sender) {
   idxSelected = cList->ItemIndex;
   if( idxSelected >= 0 )
     btnCheck( );
@@ -269,34 +249,28 @@ void __fastcall TForm1::cListChange(TObject *Sender)
   tmTimer->Enabled = false;
 }
 //---------------------------------------------------------------------------
-
-void __fastcall TForm1::btnAboutClick(TObject *Sender)
-{
+void __fastcall TForm1::btnAboutClick(TObject *Sender) {
   TdlgAbout *about = new TdlgAbout( this );
   about->ShowModal( );
 }
 
 //---------------------------------------------------------------------------
-void __fastcall TForm1::onTimer(TObject *Sender)
-{
+void __fastcall TForm1::onTimer(TObject *Sender) {
   if( tmType == timer_abort )
     Application->Terminate( );
 
-  if( tmType == timer_launch )
-  {
+  if( tmType == timer_launch ) {
     if( idxSelected < 0 )
       return;
 
     AnsiString app = gwExe;
     AnsiString data;
     long ret = -1;
-    if( inidata->GetData( idxSelected, data ) )
-    {
+    if( inidata->GetData( idxSelected, data ) ) {
       confdata->SetData( "LastUsed", AnsiString( idxSelected ) );
       app += " " + data;
       ret = WinExec( app.c_str( ), SW_SHOW );
-      if( ret > 32 )
-      {
+      if( ret > 32 ) {
         getPos( );
         confdata->WriteFile( );
         inidata->WriteFile( );
@@ -310,9 +284,7 @@ void __fastcall TForm1::onTimer(TObject *Sender)
 
 //---------------------------------------------------------------------------
 
-void __fastcall TForm1::cListKeyDown(TObject *Sender, WORD &Key,
-      TShiftState Shift)
-{
+void __fastcall TForm1::cListKeyDown(TObject *Sender, WORD &Key, TShiftState Shift) {
 //
   idxSelected = cList->ItemIndex;
   if( idxSelected >= 0 )

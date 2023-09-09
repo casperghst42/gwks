@@ -32,8 +32,7 @@
 //---------------------------------------------------------------------------
 typedef enum { cancel = 0, delete_item, save_item } conf_return;
 //---------------------------------------------------------------------------
-class TForm2 : public TForm
-{
+class TForm2 : public TForm {
 __published:	// IDE-managed Components
   TLabel *lbParam;
   TLabel *lbName;

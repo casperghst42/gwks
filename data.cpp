@@ -23,8 +23,7 @@
 
 #include "data.h"
 //---------------------------------------------------------------------------
-void cpTiniFile::ReadFile( )
-{
+void cpTiniFile::ReadFile( ) {
   alist->Clear( );
   TStringList *strlst = new TStringList( );
   TIniFile *tfile = new TIniFile( file );
@@ -50,8 +49,7 @@ void cpTiniFile::ReadFile( )
 }
 
 //---------------------------------------------------------------------------
-void cpTiniFile::WriteFile( )
-{
+void cpTiniFile::WriteFile( ) {
   TIniFile *tfile = new TIniFile( file );
   tfile->EraseSection( section );
 
@@ -66,8 +64,7 @@ void cpTiniFile::WriteFile( )
 }
 
 //---------------------------------------------------------------------------
-bool cpTiniFile::GetName( int idx, AnsiString& name )
-{
+bool cpTiniFile::GetName( int idx, AnsiString& name ) {
   if( idx >= alist->Count )
     return false;
 
@@ -78,8 +75,7 @@ bool cpTiniFile::GetName( int idx, AnsiString& name )
 }
 
 //---------------------------------------------------------------------------
-bool cpTiniFile::GetData( AnsiString key, AnsiString& data )
-{
+bool cpTiniFile::GetData( AnsiString key, AnsiString& data ) {
   for( int i = 0; i < alist->Count; i++ )
   {
     cpPTiniData d = (cpPTiniData)alist->Items[i];
@@ -94,8 +90,7 @@ bool cpTiniFile::GetData( AnsiString key, AnsiString& data )
 }
 
 //---------------------------------------------------------------------------
-bool cpTiniFile::GetData( int idx, AnsiString& data )
-{
+bool cpTiniFile::GetData( int idx, AnsiString& data ) {
   if( idx >= alist->Count )
     return false;
 
@@ -107,8 +102,7 @@ bool cpTiniFile::GetData( int idx, AnsiString& data )
 
 
 //---------------------------------------------------------------------------
-bool cpTiniFile::SetData( AnsiString key, AnsiString data )
-{
+bool cpTiniFile::SetData( AnsiString key, AnsiString data ) {
   for( int i = 0; i < alist->Count; i++ )
   {
     cpPTiniData d = (cpPTiniData)alist->Items[i];
@@ -123,8 +117,7 @@ bool cpTiniFile::SetData( AnsiString key, AnsiString data )
 }
 
 //---------------------------------------------------------------------------
-bool cpTiniFile::SetData( int idx, AnsiString& name, AnsiString& data )
-{
+bool cpTiniFile::SetData( int idx, AnsiString& name, AnsiString& data ) {
   int cnt = alist->Count;
   if( idx >= cnt )
   {
@@ -145,8 +138,7 @@ bool cpTiniFile::SetData( int idx, AnsiString& name, AnsiString& data )
 }
 
 //---------------------------------------------------------------------------
-bool cpTiniFile::DelData( int idx )
-{
+bool cpTiniFile::DelData( int idx ) {
   if( ( idx >= 0 ) && ( idx <= alist->Count ) )
   {
     alist->Delete( idx );

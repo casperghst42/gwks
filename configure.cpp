@@ -27,9 +27,7 @@
 #pragma resource "*.dfm"
 TForm2 *Form2;
 //---------------------------------------------------------------------------
-__fastcall TForm2::TForm2(TComponent* Owner )
-  : TForm(Owner)
-{
+__fastcall TForm2::TForm2(TComponent* Owner ) : TForm(Owner) {
   isCancel = false;
   currentEdt = -1;
   isNew = true;
@@ -39,8 +37,7 @@ __fastcall TForm2::TForm2(TComponent* Owner )
 }
 
 //---------------------------------------------------------------------------
-void TForm2::CurrentSelection( int current )
-{
+void TForm2::CurrentSelection( int current ) {
   currentEdt = current;
   isNew = ( current == -1 );
   if( isNew )
@@ -48,16 +45,14 @@ void TForm2::CurrentSelection( int current )
 }
 
 //---------------------------------------------------------------------------
-void __fastcall TForm2::btnCancelClick(TObject *Sender)
-{
+void __fastcall TForm2::btnCancelClick(TObject *Sender) {
   this->Close( );
   isCancel = true;
   ModalResult = mrCancel;
   result = cancel;
 }
 //---------------------------------------------------------------------------
-void __fastcall TForm2::btnSaveClick(TObject *Sender)
-{
+void __fastcall TForm2::btnSaveClick(TObject *Sender) {
   this->Close( );
   isCancel = false;
   ModalResult = mrOk;
@@ -65,8 +60,7 @@ void __fastcall TForm2::btnSaveClick(TObject *Sender)
 }
 //---------------------------------------------------------------------------
 
-void __fastcall TForm2::btnDeleteClick(TObject *Sender)
-{
+void __fastcall TForm2::btnDeleteClick(TObject *Sender) {
   this->Close( );
   isCancel = false;
   ModalResult = mrOk;

@@ -27,13 +27,10 @@
 #pragma resource "*.dfm"
 TdlgAbout *dlgAbout;
 //---------------------------------------------------------------------------
-__fastcall TdlgAbout::TdlgAbout(TComponent* Owner)
-  : TForm(Owner)
-{
+__fastcall TdlgAbout::TdlgAbout(TComponent* Owner) : TForm(Owner) {
 }
 //---------------------------------------------------------------------------
-void __fastcall TdlgAbout::btnOkClick(TObject *Sender)
-{
+void __fastcall TdlgAbout::btnOkClick(TObject *Sender) {
   this->Close( );  
 }
 //---------------------------------------------------------------------------

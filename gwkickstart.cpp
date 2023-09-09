@@ -26,17 +26,14 @@ USEFORM("configure.cpp", Form2);
 USEUNIT("data.cpp");
 USEFORM("about.cpp", dlgAbout);
 //---------------------------------------------------------------------------
-WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
-{
-  try
-  {
+WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
+  try {
      Application->Initialize();
      Application->Title = "Groupwise KickStart";
      Application->CreateForm(__classid(TForm1), &Form1);
      Application->Run();
   }
-  catch (Exception &exception)
-  {
+  catch (Exception &exception) {
      Application->ShowException(&exception);
   }
   return 0;

@@ -45,8 +45,7 @@
 #define timer_abort 1
 #define timer_launch 2
 //---------------------------------------------------------------------------
-class TForm1 : public TForm
-{
+class TForm1 : public TForm {
 __published:	// IDE-managed Components
   TButton *btnConfigure;
   TComboBox *cList;

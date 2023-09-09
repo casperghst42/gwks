@@ -26,8 +26,7 @@
 #include <StdCtrls.hpp>
 #include <Forms.hpp>
 //---------------------------------------------------------------------------
-class TdlgAbout : public TForm
-{
+class TdlgAbout : public TForm {
 __published:	// IDE-managed Components
   TButton *btnOk;
   TMemo *mInfo;
